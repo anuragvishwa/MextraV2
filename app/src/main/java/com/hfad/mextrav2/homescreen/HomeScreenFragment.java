@@ -48,5 +48,10 @@ public class HomeScreenFragment extends Fragment implements HomeScreenContract.V
     public void getTitle() {
 
     }
+
+    @Override
+    public void isSilent() {
+
+    }
 }
 

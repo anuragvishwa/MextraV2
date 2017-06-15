@@ -9,8 +9,7 @@ import com.hfad.mextrav2.util.BaseView;
 
 public interface HomeScreenContract {
 
-    interface View extends BaseView<Presenter>
-    {
+    interface View extends BaseView<Presenter> {
 
         void showNotifications();
 
@@ -21,6 +20,8 @@ public interface HomeScreenContract {
         void showLastStatusTimeStamp();
 
         void getTitle();
+
+        void isSilent();
 
     }
 
@@ -34,5 +35,8 @@ public interface HomeScreenContract {
 
         void fetchStatus();
 
+        void makeSilent();
+
 
     }
+}
