@@ -17,7 +17,7 @@ import android.util.Log;
 
 public class FetchContacts {
 
-    ArrayList<Contact> contacts = new ArrayList<Contact>();
+    public ArrayList<Contact> contacts = new ArrayList<Contact>();
 
     //Reading from the content provider and populating the Arraylist:
 
@@ -25,8 +25,10 @@ public class FetchContacts {
     Cursor cursor = null;
     ContentResolver contentResolver = context.getContentResolver();
 
-    public void FetchContacts()
+    public ArrayList<Contact> FetchContacts()
     {
+
+        //this.context = context;
 
         try {
 
@@ -97,6 +99,7 @@ public class FetchContacts {
 
       }
 
+  return contacts;
     }
 
 }
