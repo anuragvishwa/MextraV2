@@ -1,6 +1,11 @@
 package com.hfad.mextrav2.adapter;
 
+import android.content.ContentResolver;
+import android.content.Context;
+import android.database.Cursor;
+import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +13,111 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hfad.mextrav2.R;
+import com.hfad.mextrav2.model.Contact;
+
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  * Created by energywin4 on 16/6/2017.
  */
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
+
+    public static class FetchContactsAll {
+
+        public ArrayList<Contact> contacts = new ArrayList<Contact>();
+
+        //Reading from the content provider and populating the Arraylist:
+
+        Context context;
+        Cursor cursor = null;
+        ContentResolver contentResolver = context.getContentResolver();
+
+        public FetchContactsAll()
+        {
+
+            //this.context = context;
+
+            try {
+
+                cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,null,null,null,null);
+
+            }
+
+            catch (Exception ex) {
+
+                Log.e("Error fetching contact",ex.getMessage());
+
+            }
+
+
+            if(cursor.getCount()>0){
+                while(cursor.moveToNext())
+                {
+
+                    Contact contact = new Contact();
+
+                    String contact_id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+                    String display_name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+
+
+                    //Setting the name to contact Model:
+
+                    contact.setName(display_name);
+
+                    //--- Check if mobile number is present
+
+                    int hasMobNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)));
+
+                    if(hasMobNumber>0)
+                    {
+                        Cursor phoneCursor = contentResolver.query(
+                                ContactsContract.CommonDataKinds.Phone.CONTENT_URI
+                                ,null
+                                ,ContactsContract.CommonDataKinds.Phone.CONTACT_ID+"=?"
+                                ,new String[]{contact_id}
+                                ,null);
+
+                        while(phoneCursor.moveToNext()) {
+
+
+                            int phoneNumber = Integer.parseInt(phoneCursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)));
+
+                            //Set the data to contacts :
+                            contact.setMob(phoneNumber);
+
+                        }
+
+                        phoneCursor.close();
+
+                        contacts.add(contact);
+
+                    }
+
+
+
+                }
+
+
+
+
+
+
+
+
+            }
+
+
+        }
+
+
+
+    }
+
+
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -48,11 +152,21 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ContactsAdapter.ViewHolder holder, int position) {
+        FetchContactsAll fetchContactsAll = new FetchContactsAll();
+        Contact ListItem = fetchContactsAll.contacts.get(position);
+
+        holder.title.setText(ListItem.getName());
+        holder.status.setText(ListItem.getMob());
+        holder.main_image.setImageResource(R.drawable.ic_add);
+        holder.timestamp.setText("5:55 am");
+        holder.notification.setText("23");
+        holder.silentstatus.setText("2");
+        holder.stline.bringToFront();
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return new FetchContactsAll().contacts.size() ;
     }
 }

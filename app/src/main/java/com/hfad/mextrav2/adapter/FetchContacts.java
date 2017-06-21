@@ -25,7 +25,7 @@ public class FetchContacts {
     Cursor cursor = null;
     ContentResolver contentResolver = context.getContentResolver();
 
-    public ArrayList<Contact> FetchContacts()
+    public ArrayList<Contact> FetchAllContacts()
     {
 
         //this.context = context;
@@ -101,5 +101,7 @@ public class FetchContacts {
 
   return contacts;
     }
+
+
 
 }
