@@ -25,6 +25,15 @@ import java.util.ArrayList;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
 
+    public ArrayList<Contact> contactList;
+    Context context;
+
+    public ContactsAdapter(ArrayList<Contact> listContacts,Context context)
+    {
+        contactList = listContacts;
+        this.context = context;
+    }
+
     public static class FetchContactsAll {
 
         public ArrayList<Contact> contacts = new ArrayList<Contact>();
