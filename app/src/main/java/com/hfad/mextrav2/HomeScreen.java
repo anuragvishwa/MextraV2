@@ -23,6 +23,7 @@ public class HomeScreen extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private ArrayList<Contact> contactList;
     ContactsAdapter.FetchContactsAll fetchContactsAll = new ContactsAdapter.FetchContactsAll();
+    public ArrayList<Contact> allContacts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +46,9 @@ public class HomeScreen extends AppCompatActivity {
                     recyclerView = (RecyclerView)findViewById(R.id.recylerView);
                     recyclerView.setHasFixedSize(true);
                     recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                    contactList = fetchContactsAll.contacts;
-                    adapter = new ContactsAdapter(contactList,this);
+                  //  contactList = fetchContactsAll.contacts;
+                    allContacts=fetchContactsAll.FetchContactsAll(this);
+                    adapter = new ContactsAdapter(allContacts,this);
                     recyclerView.setAdapter(adapter);
 
                 } else {

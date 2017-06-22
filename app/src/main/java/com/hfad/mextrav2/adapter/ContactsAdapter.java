@@ -42,10 +42,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
         Context context;
         Cursor cursor = null;
-        ContentResolver contentResolver = context.getContentResolver();
+        ContentResolver contentResolver;
 
-        public FetchContactsAll()
+        public ArrayList<Contact> FetchContactsAll(Context context)
         {
+            contentResolver = context.getContentResolver();
 
             //this.context = context;
 
@@ -117,6 +118,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
 
             }
+            return contacts;
 
 
         }
