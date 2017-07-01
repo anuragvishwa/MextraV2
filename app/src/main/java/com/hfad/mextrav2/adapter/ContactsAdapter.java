@@ -3,6 +3,7 @@ package com.hfad.mextrav2.adapter;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -43,12 +44,22 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         Context context;
         Cursor cursor = null;
         ContentResolver contentResolver;
+        Uri PhoneCONTENT_URI = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+        String Phone_CONTACT_ID = ContactsContract.CommonDataKinds.Phone.CONTACT_ID;
+        String phoneNumber = null;
+        StringBuffer output;
+        String NUMBER = ContactsContract.CommonDataKinds.Phone.NUMBER;
 
         public ArrayList<Contact> FetchContactsAll(Context context)
         {
+
             contentResolver = context.getContentResolver();
 
             //this.context = context;
+
+           // cursor = null;
+
+
 
             try {
 
@@ -64,8 +75,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
 
             if(cursor.getCount()>0){
+
+
                 while(cursor.moveToNext())
                 {
+                    output = new StringBuffer();
 
                     Contact contact = new Contact();
 
@@ -83,28 +97,23 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
                     if(hasMobNumber>0)
                     {
-                        Cursor phoneCursor = contentResolver.query(
-                                ContactsContract.CommonDataKinds.Phone.CONTENT_URI
-                                ,null
-                                ,ContactsContract.CommonDataKinds.Phone.CONTACT_ID+"=?"
-                                ,new String[]{contact_id}
-                                ,null);
-
-                        while(phoneCursor.moveToNext()) {
 
 
-                            int phoneNumber = Integer.parseInt(phoneCursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)));
+                        Cursor phoneCursor = contentResolver.query(PhoneCONTENT_URI, null, Phone_CONTACT_ID + " = ?", new String[] { contact_id }, null);
+                        /*String vishwa = String.valueOf(phoneCursor);
+                        Log.v("HomeScreen", vishwa);*/
 
-                            //Set the data to contacts :
-                            contact.setMob(phoneNumber);
+                        while (phoneCursor.moveToNext()) {
 
+                            phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(NUMBER));
+                            output.append("\n Phone number:" + phoneNumber);
                         }
-
                         phoneCursor.close();
 
-                        contacts.add(contact);
+                     //   contacts.add(contact);
 
                     }
+                    Log.v("HomeScreen",output.toString());
 
 
 
@@ -123,12 +132,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
         }
 
-
-
     }
-
-
-
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 

@@ -3,7 +3,7 @@ package com.hfad.mextrav2.model;
 public class Contact {
 
     private String name;
-    private int mob;
+    private int[] mob;
 
     public String getName() {
         return name;
@@ -13,11 +13,11 @@ public class Contact {
         this.name = name;
     }
 
-    public int getMob() {
+    public int[] getMob() {
         return mob;
     }
 
-    public void setMob(int mob) {
+    public void setMob(int[] mob) {
         this.mob = mob;
     }
 
