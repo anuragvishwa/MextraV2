@@ -76,7 +76,7 @@ public class FetchContacts {
                       int phoneNumber = Integer.parseInt(phoneCursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)));
 
                       //Set the data to contacts :
-                      contact.setMob(phoneNumber);
+                    //  contact.setMob(phoneNumber);
 
                   }
 

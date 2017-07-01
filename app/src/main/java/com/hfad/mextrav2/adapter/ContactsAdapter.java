@@ -19,6 +19,7 @@ import com.hfad.mextrav2.model.Contact;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by energywin4 on 16/6/2017.
@@ -26,7 +27,8 @@ import java.util.ArrayList;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
 
-    public ArrayList<Contact> contactList;
+    public HashMap<Integer,Contact> contactList;
+ //   public ArrayList<Contact> allContacts;
     Context context;
 
     public ContactsAdapter(ArrayList<Contact> listContacts,Context context)
@@ -35,9 +37,9 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         this.context = context;
     }
 
-    public static class FetchContactsAll {
+    public class FetchContactsAll {
 
-        public ArrayList<Contact> contacts = new ArrayList<Contact>();
+        public ArrayList<Integer> ListNumbers = new ArrayList<Integer>();
 
         //Reading from the content provider and populating the Arraylist:
 
@@ -50,85 +52,41 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         StringBuffer output;
         String NUMBER = ContactsContract.CommonDataKinds.Phone.NUMBER;
 
-        public ArrayList<Contact> FetchContactsAll(Context context)
+        public HashMap<Integer,Contact> FetchContactsAll(Context context)
         {
-
             contentResolver = context.getContentResolver();
-
-            //this.context = context;
-
-           // cursor = null;
-
-
-
             try {
 
                 cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,null,null,null,null);
-
             }
-
             catch (Exception ex) {
-
                 Log.e("Error fetching contact",ex.getMessage());
-
             }
 
 
             if(cursor.getCount()>0){
-
-
                 while(cursor.moveToNext())
                 {
-                    output = new StringBuffer();
-
                     Contact contact = new Contact();
-
                     String contact_id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
                     String display_name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-
-
-                    //Setting the name to contact Model:
-
                     contact.setName(display_name);
-
-                    //--- Check if mobile number is present
-
                     int hasMobNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)));
-
                     if(hasMobNumber>0)
                     {
-
-
                         Cursor phoneCursor = contentResolver.query(PhoneCONTENT_URI, null, Phone_CONTACT_ID + " = ?", new String[] { contact_id }, null);
-                        /*String vishwa = String.valueOf(phoneCursor);
-                        Log.v("HomeScreen", vishwa);*/
-
                         while (phoneCursor.moveToNext()) {
-
                             phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(NUMBER));
-                            output.append("\n Phone number:" + phoneNumber);
+                            int mobile = Integer.parseInt( phoneNumber);
+                            ListNumbers.add(mobile);
                         }
                         phoneCursor.close();
-
-                     //   contacts.add(contact);
-
+                        contact.setMob(ListNumbers);
                     }
-                    Log.v("HomeScreen",output.toString());
-
-
-
+                    contactList.put(Integer.parseInt(contact_id),contact);
                 }
-
-
-
-
-
-
-
-
             }
-            return contacts;
-
+            return contactList;
 
         }
 
@@ -168,10 +126,10 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     @Override
     public void onBindViewHolder(ContactsAdapter.ViewHolder holder, int position) {
         FetchContactsAll fetchContactsAll = new FetchContactsAll();
-        Contact ListItem = fetchContactsAll.contacts.get(position);
+        Contact ListItem = fetchContactsAll.contactList.get(position);
 
         holder.title.setText(ListItem.getName());
-        holder.status.setText(ListItem.getMob());
+     //   holder.status.setText(ListItem.getMob());
         holder.main_image.setImageResource(R.drawable.ic_add);
         holder.timestamp.setText("5:55 am");
         holder.notification.setText("23");

@@ -1,9 +1,11 @@
 package com.hfad.mextrav2.model;
 
+import java.util.ArrayList;
+
 public class Contact {
 
     private String name;
-    private int[] mob;
+    private ArrayList<Integer> mob;
 
     public String getName() {
         return name;
@@ -13,11 +15,11 @@ public class Contact {
         this.name = name;
     }
 
-    public int[] getMob() {
+    public ArrayList<Integer> getMob() {
         return mob;
     }
 
-    public void setMob(int[] mob) {
+    public void setMob(ArrayList<Integer> mob) {
         this.mob = mob;
     }
 
