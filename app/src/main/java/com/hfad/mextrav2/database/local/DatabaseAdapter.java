@@ -4,6 +4,7 @@ package com.hfad.mextrav2.database.local;
  * Created by vishwa on 3/7/17.
  */
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -21,8 +22,8 @@ public class DatabaseAdapter {
     try{
         SQLiteOpenHelper mextraDatabaseHelper = new MextraDatabaseHelper(this.context);
         SQLiteDatabase db = mextraDatabaseHelper.getWritableDatabase();
-        Cursor cursor = db.query("CONTACTS",
-                )
+        ContentValues contentValues = new ContentValues();
+        contentValues.put()
 
     }
 
