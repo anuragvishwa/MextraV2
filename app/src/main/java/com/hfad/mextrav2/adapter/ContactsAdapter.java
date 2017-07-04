@@ -1,3 +1,4 @@
+/*
 package com.hfad.mextrav2.adapter;
 
 import android.content.ContentResolver;
@@ -21,9 +22,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by energywin4 on 16/6/2017.
- */
+
+
+
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
 
@@ -143,3 +144,4 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         return new FetchContactsAll().contacts.size() ;
     }
 }
+*/

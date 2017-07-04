@@ -21,7 +21,7 @@ class MextraDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE CONTACTS(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "cpi INTEGER," +
                 "name TEXT," +
-                "mobile INTEGER," +
+                "mobile TEXT," +
                 "datetime NUMERIC );");
     }
 
