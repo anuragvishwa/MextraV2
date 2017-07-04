@@ -159,7 +159,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     @Override
     public void onBindViewHolder(ContactsAdapter.ViewHolder holder, int position) {
 
-        Contact ListItem = contactList.get(position);
+        Contact ListItem = allContacts.get(position);
 
         holder.title.setText(ListItem.getName());
         holder.status.setText(ListItem.getMob());
@@ -173,6 +173,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return contactList.size() ;
+        return allContacts.size() ;
     }
 }
