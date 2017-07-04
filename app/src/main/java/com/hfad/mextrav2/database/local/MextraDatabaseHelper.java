@@ -4,12 +4,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-class MextraDatabaseHelper extends SQLiteOpenHelper {
+public class MextraDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "mextra";
     private static final int DB_VERSION =1;
 
-    MextraDatabaseHelper(Context context){
+    public MextraDatabaseHelper(Context context){
 
         super(context,DB_NAME,null,DB_VERSION);
 

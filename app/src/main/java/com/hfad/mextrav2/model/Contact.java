@@ -1,11 +1,13 @@
 package com.hfad.mextrav2.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Contact {
 
     private String name;
-    private ArrayList<Integer> mob;
+    private String mob;
+    //private Date datetime;
 
     public String getName() {
         return name;
@@ -15,14 +17,11 @@ public class Contact {
         this.name = name;
     }
 
-    public ArrayList<Integer> getMob() {
+    public String getMob() {
         return mob;
     }
 
-    public void setMob(ArrayList<Integer> mob) {
+    public void setMob(String mob) {
         this.mob = mob;
     }
-
-
-
 }

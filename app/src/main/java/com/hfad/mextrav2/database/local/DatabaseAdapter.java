@@ -98,7 +98,7 @@ public class DatabaseAdapter {
 
             }
         }
-
+        cursor.close();
         db.close();
 
         //Create a cursor

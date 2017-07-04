@@ -1,9 +1,10 @@
-/*
 package com.hfad.mextrav2.adapter;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +22,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
+import com.hfad.mextrav2.database.local.*;
 
 
 
@@ -28,17 +30,45 @@ import java.util.HashMap;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
 
-    public HashMap<Integer,Contact> contactList;
- //   public ArrayList<Contact> allContacts;
+   // public HashMap<Integer,Contact> contactList;
+    public ArrayList<Contact> allContacts;
+
+    public ArrayList<Contact> contactList = new ArrayList<Contact>();
+    Contact contact = new Contact();
+
     Context context;
 
     public ContactsAdapter(ArrayList<Contact> listContacts,Context context)
     {
-        contactList = listContacts;
+        readContacts();
+        allContacts = listContacts;
         this.context = context;
     }
 
-    public class FetchContactsAll {
+    public void readContacts()
+    {
+        SQLiteOpenHelper mextraDatabasehelper = new MextraDatabaseHelper(context);
+        SQLiteDatabase db = mextraDatabasehelper.getReadableDatabase();
+        Cursor cursor = db.query("CONTACTS",
+                new String[] {"name", "mobile"},
+                null,null,null,null,null);
+
+        if (cursor.moveToFirst()){
+            do{
+                String name = cursor.getString(cursor.getColumnIndex("name"));
+                String mobileno = cursor.getString(cursor.getColumnIndex("mobile"));
+
+                contact.setName(name);
+                contact.setMob(mobileno);
+                contactList.add(contact);
+
+            }while(cursor.moveToNext());
+        }
+
+
+    }
+
+   /* public class FetchContactsAll {
 
         public ArrayList<Integer> ListNumbers = new ArrayList<Integer>();
 
@@ -91,7 +121,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
         }
 
-    }
+    }*/
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -126,11 +156,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ContactsAdapter.ViewHolder holder, int position) {
-        FetchContactsAll fetchContactsAll = new FetchContactsAll();
-        Contact ListItem = fetchContactsAll.contactList.get(position);
+
+        Contact ListItem = contactList.get(position);
 
         holder.title.setText(ListItem.getName());
-     //   holder.status.setText(ListItem.getMob());
+        holder.status.setText(ListItem.getMob());
         holder.main_image.setImageResource(R.drawable.ic_add);
         holder.timestamp.setText("5:55 am");
         holder.notification.setText("23");
@@ -141,7 +171,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return new FetchContactsAll().contacts.size() ;
+        return contactList.size() ;
     }
 }
-*/

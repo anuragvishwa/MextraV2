@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 
 //import com.hfad.mextrav2.adapter.ContactsAdapter;
+import com.hfad.mextrav2.adapter.ContactsAdapter;
 import com.hfad.mextrav2.database.local.DatabaseAdapter;
 import com.hfad.mextrav2.model.Contact;
 
@@ -61,19 +62,22 @@ public class HomeScreen extends AppCompatActivity {
 
         fetchTheContacts();
 
-       /* recyclerView = (RecyclerView)findViewById(R.id.recylerView);
+        recyclerView = (RecyclerView)findViewById(R.id.recylerView);
       //  recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //  contactList = fetchContactsAll.contacts;
+/*
         fetchContactsAll = new ContactsAdapter.FetchContactsAll();
 
 
 
         allContacts=fetchContactsAll.FetchContactsAll(this);
+*/
+        allContacts = ;
 
         adapter = new ContactsAdapter(allContacts,this);
 
-        recyclerView.setAdapter(adapter);*/
+        recyclerView.setAdapter(adapter);
     }
 
 
