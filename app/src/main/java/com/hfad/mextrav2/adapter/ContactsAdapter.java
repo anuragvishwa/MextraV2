@@ -33,20 +33,21 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
    // public HashMap<Integer,Contact> contactList;
     public ArrayList<Contact> allContacts;
 
-    public ArrayList<Contact> contactList = new ArrayList<Contact>();
-    Contact contact = new Contact();
+    public static ArrayList<Contact> contactList = new ArrayList<Contact>();
+
 
     Context context;
 
     public ContactsAdapter(ArrayList<Contact> listContacts,Context context)
     {
-        readContacts();
+        //readContacts();
         allContacts = listContacts;
         this.context = context;
     }
 
-    public void readContacts()
+    public static ArrayList<Contact> readContacts(Context context)
     {
+        Contact contact = new Contact();
         SQLiteOpenHelper mextraDatabasehelper = new MextraDatabaseHelper(context);
         SQLiteDatabase db = mextraDatabasehelper.getReadableDatabase();
         Cursor cursor = db.query("CONTACTS",
@@ -65,6 +66,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             }while(cursor.moveToNext());
         }
 
+        return contactList;
 
     }
 

@@ -73,7 +73,7 @@ public class HomeScreen extends AppCompatActivity {
 
         allContacts=fetchContactsAll.FetchContactsAll(this);
 */
-        allContacts = ;
+        allContacts = ContactsAdapter.readContacts(this);
 
         adapter = new ContactsAdapter(allContacts,this);
 
