@@ -47,7 +47,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
     public static ArrayList<Contact> readContacts(Context context)
     {
-        Contact contact = new Contact();
+        Contact contact ;
         SQLiteOpenHelper mextraDatabasehelper = new MextraDatabaseHelper(context);
         SQLiteDatabase db = mextraDatabasehelper.getReadableDatabase();
         Cursor cursor = db.query("CONTACTS",
@@ -56,6 +56,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
         if (cursor.moveToFirst()){
             do{
+                contact = new Contact();
                 String name = cursor.getString(cursor.getColumnIndex("name"));
                 String mobileno = cursor.getString(cursor.getColumnIndex("mobile"));
 
@@ -65,7 +66,13 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
             }while(cursor.moveToNext());
         }
+        cursor.close();
 
+        for(int i=0;i<contactList.size();i++)
+        {
+            Contact c= contactList.get(i);
+            Log.v("ContactList",c.getMob());
+        }
         return contactList;
 
     }

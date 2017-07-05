@@ -79,7 +79,7 @@ public class DatabaseAdapter {
                             contentValues.put("mobile",phoneNumber);
                             contentValues.put("datetime",timeStamp);
                             db.insert("CONTACTS",null,contentValues);
-                            Log.v("DatabaseAdapter",phoneNumber);
+                           // Log.v("DatabaseAdapter",phoneNumber);
 
                         }
 
