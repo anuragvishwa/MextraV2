@@ -41,6 +41,7 @@ public class DatabaseAdapter {
 
     public void StoreContacts(Context context) {
 
+
         contentResolver = context.getContentResolver();
 
         try {

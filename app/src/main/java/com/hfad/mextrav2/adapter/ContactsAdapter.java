@@ -152,13 +152,13 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             timestamp = (TextView) itemView.findViewById(R.id.timestamp);
             notification = (TextView) itemView.findViewById(R.id.notification);
             silentstatus = (TextView) itemView.findViewById(R.id.silentstatus);
-            stline = (View) itemView.findViewById(R.id.stline);
+
         }
     }
 
     @Override
     public ContactsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_screen_frag,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_contacts,parent,false);
 
         return new ViewHolder(v);
     }
@@ -170,11 +170,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
         holder.title.setText(ListItem.getName());
         holder.status.setText(ListItem.getMob());
-        holder.main_image.setImageResource(R.drawable.ic_add);
+        holder.main_image.setImageResource(R.drawable.logo);
         holder.timestamp.setText("5:55 am");
         holder.notification.setText("23");
         holder.silentstatus.setText("2");
-        holder.stline.bringToFront();
+
 
     }
 
