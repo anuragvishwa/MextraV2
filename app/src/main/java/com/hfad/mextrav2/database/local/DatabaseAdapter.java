@@ -41,70 +41,69 @@ public class DatabaseAdapter {
 
     public void StoreContacts(Context context) {
 
+      /*  SQLiteOpenHelper mextraDatabaseChecker = new MextraDatabaseHelper(context);
+        db = mextraDatabaseChecker.getReadableDatabase();
+        final Cursor cursorcheck = db.rawQuery("SELECT COUNT(_id) FROM CONTACTS",null);
+        if(cursorcheck==null) {
+*/
 
-        contentResolver = context.getContentResolver();
+            contentResolver = context.getContentResolver();
 
-        try {
+            try {
 
-            cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,null,null,null,null);
-        }
-        catch (Exception ex) {
-            Log.e("Error fetching contact",ex.getMessage());
-        }
-
-
-        if(cursor.getCount()>0){
-            while(cursor.moveToNext())
-            {
-
-                String contact_id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-                int contact_id_int = Integer.parseInt(contact_id);
-
-                String display_name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-
-                int hasMobNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)));
-                if(hasMobNumber>0)
-                {
-                    Cursor phoneCursor = contentResolver.query(PhoneCONTENT_URI, null, Phone_CONTACT_ID + " = ?", new String[] { contact_id }, null);
-                    while (phoneCursor.moveToNext()) {
-                        phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(NUMBER));
+                cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+            } catch (Exception ex) {
+                Log.e("Error fetching contact", ex.getMessage());
+            }
 
 
-                        try {
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
 
-                            SQLiteOpenHelper mextraDatabaseHelper = new MextraDatabaseHelper(context);
-                            db = mextraDatabaseHelper.getWritableDatabase();
-                            ContentValues contentValues = new ContentValues();
-                            contentValues.put("cpi",contact_id_int );
-                            contentValues.put("name",display_name);
-                            contentValues.put("mobile",phoneNumber);
-                            contentValues.put("datetime",timeStamp);
-                            db.insert("CONTACTS",null,contentValues);
-                           // Log.v("DatabaseAdapter",phoneNumber);
+                    String contact_id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+                    int contact_id_int = Integer.parseInt(contact_id);
+
+                    String display_name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+
+                    int hasMobNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)));
+                    if (hasMobNumber > 0) {
+                        Cursor phoneCursor = contentResolver.query(PhoneCONTENT_URI, null, Phone_CONTACT_ID + " = ?", new String[]{contact_id}, null);
+                        while (phoneCursor.moveToNext()) {
+                            phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(NUMBER));
+
+
+                            try {
+
+                                SQLiteOpenHelper mextraDatabaseHelper = new MextraDatabaseHelper(context);
+                                db = mextraDatabaseHelper.getWritableDatabase();
+                                ContentValues contentValues = new ContentValues();
+                                contentValues.put("cpi", contact_id_int);
+                                contentValues.put("name", display_name);
+                                contentValues.put("mobile", phoneNumber);
+                                contentValues.put("datetime", timeStamp);
+                                db.insert("CONTACTS", null, contentValues);
+                                // Log.v("DatabaseAdapter",phoneNumber);
+
+                            } catch (SQLiteException ex) {
+                                Log.v("DatabaseAdapter", ex.getMessage());
+                            }
+
 
                         }
 
-                        catch (SQLiteException ex){
-                            Log.v("DatabaseAdapter",ex.getMessage());
-                        }
-
-
-
+                        phoneCursor.close();
 
                     }
 
-                    phoneCursor.close();
-
                 }
-
             }
-        }
-        cursor.close();
-        db.close();
+            cursor.close();
+            db.close();
 
-        //Create a cursor
+            //Create a cursor
 
 
+      //  }
 
     }
 }

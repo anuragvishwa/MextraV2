@@ -11,7 +11,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/main_image"
-        android:src="@drawable/logo" />
+        android:src="@drawable/logo"
+        android:layout_marginTop="6dp"/>
 
     <TextView
         android:layout_width="240dp"
