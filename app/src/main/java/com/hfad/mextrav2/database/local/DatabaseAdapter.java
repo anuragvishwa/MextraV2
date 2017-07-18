@@ -14,12 +14,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.util.Log;
-import android.widget.Toast;
-
-import com.hfad.mextrav2.model.Contact;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 
 /**
