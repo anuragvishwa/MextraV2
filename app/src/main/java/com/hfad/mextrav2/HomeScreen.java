@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 //import com.hfad.mextrav2.adapter.ContactsAdapter;
 import com.hfad.mextrav2.adapter.ContactsAdapter;
-import com.hfad.mextrav2.database.database.local.DatabaseAdapter;
+import com.hfad.mextrav2.database.local.DatabaseAdapter;
 import com.hfad.mextrav2.model.Contact;
 
 import java.util.ArrayList;

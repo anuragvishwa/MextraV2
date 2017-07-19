@@ -15,7 +15,12 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.util.Log;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.hfad.mextrav2.model.Contact;
+
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 
 /**
@@ -33,6 +38,9 @@ public class DatabaseAdapter {
     String NUMBER = ContactsContract.CommonDataKinds.Phone.NUMBER;
     String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
     SQLiteDatabase db;
+    List<Contact> contacts;
+    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("contacts");
+
 
 
     public void StoreContacts(Context context) {
@@ -79,6 +87,15 @@ public class DatabaseAdapter {
                                 contentValues.put("datetime", timeStamp);
                                 db.insert("CONTACTS", null, contentValues);
                                 // Log.v("DatabaseAdapter",phoneNumber);
+                                //Firebase inclusion
+                                Contact newContact = new Contact();
+                                newContact.setMob(phoneNumber);
+                                newContact.setName(display_name);
+                                String id = mDatabase.push().getKey();
+                                mDatabase.child(id).setValue(newContact);
+
+
+
 
                             } catch (SQLiteException ex) {
                                 Log.v("DatabaseAdapter", ex.getMessage());

@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hfad.mextrav2.R;
-import com.hfad.mextrav2.database.database.local.MextraDatabaseHelper;
+import com.hfad.mextrav2.database.local.MextraDatabaseHelper;
 import com.hfad.mextrav2.model.Contact;
 
 import java.util.ArrayList;
