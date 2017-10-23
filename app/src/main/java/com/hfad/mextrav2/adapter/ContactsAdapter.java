@@ -165,17 +165,13 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ContactsAdapter.ViewHolder holder, int position) {
-
         Contact ListItem = allContacts.get(position);
-
         holder.title.setText(ListItem.getName());
         holder.status.setText(ListItem.getMob());
         holder.main_image.setImageResource(R.drawable.logo);
         holder.timestamp.setText("5:55 am");
         holder.notification.setText("23");
         holder.silentstatus.setText("2");
-
-
     }
 
     @Override
