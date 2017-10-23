@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "403448372472",
+    "firebase_url": "https://mextra-3076c.firebaseio.com",
+    "project_id": "mextra-3076c",
+    "storage_bucket": "mextra-3076c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403448372472:android:177ee97390ad06ef",
+        "android_client_info": {
+          "package_name": "com.hfad.mextrav2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403448372472-03qm90nn1mfvoev3924k5l2r1lm32651.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3nIk900mjvsR6mqLS4BZtt1jzS6PZwzo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -169,4 +169,8 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     public int getItemCount() {
         return allContacts.size() ;
     }
+
+    public void fix(){
+        
+    }
 }
