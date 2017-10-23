@@ -1,12 +1,9 @@
 package com.hfad.mextrav2.adapter;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
-import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,16 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hfad.mextrav2.R;
+import com.hfad.mextrav2.database.local.MextraDatabaseHelper;
 import com.hfad.mextrav2.model.Contact;
 
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashMap;
-import com.hfad.mextrav2.database.local.*;
-
-
-
 
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
